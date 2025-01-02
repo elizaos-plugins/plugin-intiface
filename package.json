@@ -15,5 +15,31 @@
   },
   "peerDependencies": {
     "whatwg-url": "7.1.0"
+  },
+  "pluginType": "elizaos:plugin:1.0.0",
+  "pluginParameters": {
+    "type": "object",
+    "properties": {
+      "intifaceUrl": {
+        "type": "string",
+        "description": "Intiface WebSocket URL",
+        "default": "ws://localhost:12345"
+      },
+      "intifaceName": {
+        "type": "string",
+        "description": "Intiface client name",
+        "default": "Eliza Intiface Client"
+      },
+      "deviceName": {
+        "type": "string",
+        "description": "Device name",
+        "default": "Lovense Nora"
+      }
+    }
+  },
+  "pluginEnv": {
+    "INTIFACE_URL": "intifaceUrl",
+    "INTIFACE_NAME": "intifaceName",
+    "DEVICE_NAME": "deviceName"
   }
 }
