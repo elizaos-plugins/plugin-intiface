@@ -333,13 +333,19 @@ const vibrateAction: Action = {
             return false;
         }
     },
-    handler: async (
+    handler: async ({
+        runtime,
+        message,
+        state,
+        options,
+        callback,
+    }: {
         runtime: IAgentRuntime,
         message: Memory,
         state: State,
         options: any,
         callback: HandlerCallback
-    ) => {
+    }) => {
         const service = runtime.getService<IIntifaceService>(
             ServiceType.INTIFACE
         );
@@ -443,13 +449,19 @@ const rotateAction: Action = {
             return false;
         }
     },
-    handler: async (
+    handler: async ({
+        runtime,
+        message,
+        state,
+        options,
+        callback,
+    }: {
         runtime: IAgentRuntime,
         message: Memory,
         state: State,
         options: any,
         callback: HandlerCallback
-    ) => {
+    }) => {
         const service = runtime.getService<IIntifaceService>(
             ServiceType.INTIFACE
         );
@@ -501,13 +513,19 @@ const batteryAction: Action = {
             return false;
         }
     },
-    handler: async (
+    handler: async ({
+        runtime,
+        message,
+        state,
+        options,
+        callback,
+    }: {
         runtime: IAgentRuntime,
         message: Memory,
         state: State,
         options: any,
         callback: HandlerCallback
-    ) => {
+    }) => {
         const service = runtime.getService<IIntifaceService>(
             ServiceType.INTIFACE
         );
