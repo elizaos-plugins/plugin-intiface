@@ -31,5 +31,22 @@
     },
     "peerDependencies": {
         "whatwg-url": "7.1.0"
+    },
+    "agentConfig": {
+        "pluginType": "elizaos:client:1.0.0",
+        "pluginParameters": {
+            "INTIFACE_URL": {
+                "type": "string",
+                "default": "ws://localhost:12345"
+            },
+            "INTIFACE_NAME": {
+                "type": "string",
+                "default": "Eliza Intiface Client"
+            },
+            "DEVICE_NAME": {
+                "type": "string",
+                "default": "Lovense Nora"
+            }
+        }
     }
 }
