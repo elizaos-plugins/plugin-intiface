@@ -1,11 +1,20 @@
 import { Service, ServiceType, IAgentRuntime, Plugin } from '@elizaos/core';
 
+interface Device {
+    name: string;
+    index: number;
+    vibrate?: (strength: number) => Promise<void>;
+    rotate?: (strength: number) => Promise<void>;
+    stop?: () => Promise<void>;
+    battery?: () => Promise<number>;
+    id?: number;
+}
 interface IIntifaceService extends Service {
     vibrate(strength: number, duration: number): Promise<void>;
     rotate?(strength: number, duration: number): Promise<void>;
     getBatteryLevel?(): Promise<number>;
     isConnected(): boolean;
-    getDevices(): any[];
+    getDevices(): Device[];
 }
 declare class IntifaceService extends Service implements IIntifaceService {
     static serviceType: ServiceType;
@@ -29,7 +38,7 @@ declare class IntifaceService extends Service implements IIntifaceService {
     disconnect(): Promise<void>;
     private handleDeviceAdded;
     private handleDeviceRemoved;
-    getDevices(): any[];
+    getDevices(): Device[];
     isConnected(): boolean;
     private addToVibrateQueue;
     private processVibrateQueue;

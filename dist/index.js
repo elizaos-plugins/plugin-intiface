@@ -3952,10 +3952,10 @@ ${errorMessages}`
 import { Service, ServiceType } from "@elizaos/core";
 
 // src/utils.ts
-import { spawn } from "child_process";
-import net from "net";
-import path from "path";
-import { fileURLToPath } from "url";
+import { spawn } from "node:child_process";
+import net from "node:net";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 var __filename = fileURLToPath(import.meta.url);
 var __dirname = path.dirname(__filename);
 var intifaceProcess = null;
@@ -4128,10 +4128,10 @@ var IntifaceService = class extends Service {
     await this.client.startScanning();
     console.log("Scanning for devices...");
     await new Promise((r) => setTimeout(r, 2e3));
-    this.client.devices.forEach((device) => {
+    for (const device of this.client.devices) {
       this.devices.set(device.name, device);
       console.log(`- ${device.name} (${device.index})`);
-    });
+    }
     if (this.devices.size === 0) {
       console.log("No devices found");
     }
@@ -4257,6 +4257,9 @@ var IntifaceService = class extends Service {
     }
   }
   async rampedRotate(device, targetStrength, duration) {
+    if (!device.rotate || !device.stop) {
+      throw new Error("Device does not support rotation");
+    }
     const stepTime = duration * 0.2 / this.rampSteps;
     for (let i = 0; i <= this.rampSteps; i++) {
       const intensity = targetStrength / this.rampSteps * i;
@@ -4284,7 +4287,7 @@ var vibrateAction = {
       return false;
     }
   },
-  handler: async (runtime, message, state, options, callback) => {
+  handler: async (runtime, _message, _state, options, callback) => {
     const service = runtime.getService(
       ServiceType.INTIFACE
     );
@@ -4382,7 +4385,7 @@ var rotateAction = {
       return false;
     }
   },
-  handler: async (runtime, message, state, options, callback) => {
+  handler: async (runtime, _message, _state, options, callback) => {
     const service = runtime.getService(
       ServiceType.INTIFACE
     );
@@ -4430,7 +4433,7 @@ var batteryAction = {
       return false;
     }
   },
-  handler: async (runtime, message, state, options, callback) => {
+  handler: async (runtime, _message, _state, _options, callback) => {
     const service = runtime.getService(
       ServiceType.INTIFACE
     );
@@ -4442,7 +4445,7 @@ var batteryAction = {
       callback({
         text: `Device battery level is at ${Math.round(batteryLevel * 100)}%`
       });
-    } catch (err) {
+    } catch {
       callback({
         text: "Unable to get battery level. Device might not support this feature."
       });
