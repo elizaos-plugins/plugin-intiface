@@ -1,4 +1,4 @@
-import { Service, ServiceType, IAgentRuntime, Plugin } from '@elizaos/core';
+import { Plugin, Service, ServiceType, IAgentRuntime } from '@elizaos/core';
 
 interface Device {
     name: string;
